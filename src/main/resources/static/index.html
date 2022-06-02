@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Hello Page</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div class="center">
+    <form method="post" action="/" >
+        <h3>Посмотреть выросла ли валюта по сравнению со вчерашним днем</h3>
+        <h3>Выберите валюту</h3>
+        <select name="selectedCurr" id="selection">
+            <option selected>RUB</option>
+            <div th:each="curr : ${currList}">
+                <option th:text="${curr}"></option>
+            </div>
+        </select>
+
+        <button type="submit">Проверить</button>
+    </form>
+</div>
+
 </body>
 </html>

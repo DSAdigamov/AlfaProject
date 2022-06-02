@@ -8,6 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,5 +34,10 @@ public class CurrencyService {
         if (latest <= past)
             return true;
         else return false;
+    }
+
+    public List<String> getRatesNames() throws JsonProcessingException {
+        Map<String, Double> rates = currencyParser.getCurrDataFromJSON(feignCurrencyService.getLatestCurrency()).getRates();
+        return rates.keySet().stream().toList();
     }
 }
