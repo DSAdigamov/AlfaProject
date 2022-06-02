@@ -2,7 +2,7 @@ package com.example.alfaproject.controllers;
 
 import com.example.alfaproject.parsers.GiphyParser;
 import com.example.alfaproject.servises.CurrencyService;
-import com.example.alfaproject.servises.FeignGiphyService;
+import com.example.alfaproject.repositories.FeignGiphyRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ public class MainController {
     private String giphyToken;
 
 
-    private final FeignGiphyService feignGiphyService;
+    private final FeignGiphyRepo feignGiphyRepo;
     private final CurrencyService currencyService;
 
     private final GiphyParser giphyParser;
@@ -34,7 +34,6 @@ public class MainController {
 
     @PostMapping("/")
     public String redirectBySelectedCurr(@RequestParam("selectedCurr") String selectedCurr){
-        System.out.println(selectedCurr);
         return "redirect:/currency/" + selectedCurr;
     }
 
@@ -44,10 +43,10 @@ public class MainController {
 
         String giffUrl;
         if (grow){
-            giffUrl = giphyParser.getGiffUrl(feignGiphyService.getGifByTag("rich"));
+            giffUrl = giphyParser.getGiffUrl(feignGiphyRepo.getGifByTag("rich"));
             model.addAttribute("letter", "Поздравляю, валюта [" + nameOfCurr + "] выросла! ");
         } else {
-            giffUrl = giphyParser.getGiffUrl(feignGiphyService.getGifByTag("broke"));
+            giffUrl = giphyParser.getGiffUrl(feignGiphyRepo.getGifByTag("broke"));
             model.addAttribute("letter", "К сожалению, валюта [" + nameOfCurr + "] упала.");
         }
 
