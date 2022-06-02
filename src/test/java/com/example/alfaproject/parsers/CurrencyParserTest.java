@@ -2,12 +2,9 @@ package com.example.alfaproject.parsers;
 
 import com.example.alfaproject.DTO.CurrenciesDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
